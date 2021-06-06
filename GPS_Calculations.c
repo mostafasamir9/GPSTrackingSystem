@@ -28,8 +28,17 @@ static uint32_t absolute(int32_t num){
 /***********************************************************  
 *  Describtion: Function used to calculate the distance covered by from the start(initial point) 
 **************************************************************/
-uint32_t GPS_CalculateDistance(int32_t initial_x, int32_t current_x, int32_t initial_y, int32_t current_y)
-{	
-	return absolute(current_y - initial_y) + absolute(current_x - initial_x);
+//Function to calculate distance between two points using haverside algorithm in (degree.min)
+uint32_t GPS_CalculateDistance(double long1, double lat1, double long2, double lat2){
+	const int32_t r = 6371;
+	double x = (long2 - long1) * (PI / 180);
+	double y = (lat2 - lat1) * (PI / 180);
+	double a = sin(y/2) * sin(y/2) + cos(lat1 * (PI / 180)) * cos(lat2 * (PI / 180)) * sin(x/2) * sin(x/2);
+	double i = sqrt(a);
+	double j = sqrt(1-a);
+	double c = 2 * atan2(i,j);
+	double d = r * c * 1000;
+	uint32_t dis = (uint32_t) ceil(d);
+	return dis; 
 }
 
