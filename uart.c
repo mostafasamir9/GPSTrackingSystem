@@ -1,4 +1,4 @@
-#include "functions.h"
+#include "uart.h"
 
 #define PORT 'A'
 #define Uart_D 2
