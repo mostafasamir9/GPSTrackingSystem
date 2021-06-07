@@ -9,3 +9,7 @@ void LED_ON(uint16_t color){
 		GPIO_PORTF_DATA_R = 0x08;
 
 }
+
+void LED_OFF(){
+	GPIO_PORTF_DATA_R = 0;
+}
