@@ -1,0 +1,14 @@
+--cpu Cortex-M4
+".\startup_tm4c123.o"
+".\main.o"
+".\systick_program.o"
+".\lcd_program.o"
+".\dio_program.o"
+".\gps_calculations.o"
+".\pfinterruptinit.o"
+".\eeprom.o"
+".\led.o"
+".\uart.o"
+--ro-base 0x00000000 --entry 0x00000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Dio_test.map" -o .\Dio_test.axf
