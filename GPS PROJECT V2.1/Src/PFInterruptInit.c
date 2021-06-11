@@ -8,7 +8,7 @@ void PFInterruptInit(void){
 		
 	GPIO_PORTF_CR_R = 0x1F;
 	GPIO_PORTF_DIR_R = 0x0E;
-	GPIO_PORTF_PUR_R = 0x11;
+	GPIO_PORTF_PUR_R = 0x10;
 	GPIO_PORTF_DEN_R = 0x1F;
 	GPIO_PORTF_IS_R &= ~(0x10); // interrupt sense ( Edge sensitive  not level sensitive )
 	GPIO_PORTF_IBE_R  &= ~(0x10); // they're not interrupt both edges
