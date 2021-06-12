@@ -6,7 +6,7 @@ void SystemInit(void){}
 int main(void){
 	char x=5;
 	uint32_t Distance, total_Distance = 0;
-	Position p1, p2,p3,p4,p5,p6,p7,p8,avg1,avg2;
+	Position p1,p2;
 	LCD_init();
 	LCD_Print("Distance= ");
 	UART_init(UART0);
@@ -20,8 +20,6 @@ int main(void){
 //	LED_ON(1);
 	UART2_TX('x');
 	p1 = GPS_get_coordinates();
-	avg1.East=(p1.East+p2.East+p3.East+p4.East)/4.0;
-	avg1.North=(p1.North+p2.North+p3.North+p4.North)/4.0;
 	while(total_Distance<100){
 		//LCD_Print("GVD: ");
 			LCD_goToRowColumn(0, 10);

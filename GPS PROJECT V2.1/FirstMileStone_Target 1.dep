@@ -1,6 +1,6 @@
 Dependencies for Project 'FirstMileStone', Target 'Target 1': (DO NOT MODIFY !)
 F (.\startup_TM4C123.s)(0x60C128A2)(--cpu Cortex-M4 --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\TI\TM4C123--list .\startup_tm4c123.lst --xref -o .\startup_tm4c123.o --depend .\startup_tm4c123.d)
-F (.\Src\main.c)(0x60C3A0BE)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork -I "C:\Users\start\Desktop\ARM Tiva C\GPS Project\ARM Drivers\04-LIB" -I.\Include-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\TI\TM4C123-DTM4C123GH6PM-o .\main.o --omf_browse .\main.crf --depend .\main.d)
+F (.\Src\main.c)(0x60C4C2FA)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork -I "C:\Users\start\Desktop\ARM Tiva C\GPS Project\ARM Drivers\04-LIB" -I.\Include-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\TI\TM4C123-DTM4C123GH6PM-o .\main.o --omf_browse .\main.crf --depend .\main.d)
 I (.\Include\Header_Project.h)(0x60C128A2)
 I (.\Include\BIT_MATH.h)(0x60B96BA4)
 I (.\Include\STD_TYPES.h)(0x60B96B57)
