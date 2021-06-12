@@ -1,12 +1,12 @@
 /************************************************************************
 * 
-* Module      : LCD
+* Module      : GPS Module
 *
-* File Nmae   : GPS_Calculation.c
+* File Nmae   : GPS_Calculations.c
 *
 * Describtion : Source file for "GPS Module" containing the function definitions for GPS driver
 *
-* Author : Hussein Mahmoud - Mohamed Ahmed - Mohamed Fathy - Mohamed Ali - Mostafa Mohsen - Mostafa Samir
+* Authors     : Mohamed Ahmed - Hussein Mahmoud
 *
 * Version     : V01
 *
@@ -28,7 +28,6 @@ static uint32_t absolute(int32_t num){
 /***********************************************************  
 *  Describtion: Function used to calculate the distance covered by from the start(initial point) 
 **************************************************************/
-//Function to calculate distance between two points using haverside algorithm in (degree.min)
 uint32_t GPS_CalculateDistance(double long1, double lat1, double long2, double lat2){
 	const int32_t r = 6371;
 	double x = (long2 - long1) * (PI / 180);
@@ -41,4 +40,3 @@ uint32_t GPS_CalculateDistance(double long1, double lat1, double long2, double l
 	uint32_t dis = (uint32_t) ceil(d);
 	return dis; 
 }
-
