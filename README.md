@@ -7,4 +7,4 @@ GPSTrackingSystem Embedded system project for Microcontroller course using Tiva-
 ## The path we take
 ![Image](index.jpg)
 ## the website displaying the path 
-[mo1998.github.io](mo1998.github.io)
+[mo1998.github.io](https://mo1998.github.io/)
