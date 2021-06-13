@@ -26,3 +26,24 @@ void SystemInit(void){}
 	
 		
 	}
+	void GPS_Task2_TotalDistance(void)
+	{
+		if(north_east_counter<16)
+		{
+		EEPROM_write(100,p2.North*100000);
+		SYSTICK_BusyWaitms(500);
+		EEPROM_write(200,p2.East*100000);
+		SYSTICK_BusyWaitms(500);
+			north_east_counter++;
+		}
+		else if(north_east_counter>=16)
+		{
+			EEPROM_write(101,p2.North*100000);
+			SYSTICK_BusyWaitms(500);
+			EEPROM_write(201,p2.East*100000);
+			SYSTICK_BusyWaitms(500);
+		}
+		p1=p2;
+		g_TotalDis += g_SampleDis;
+		g_SampleDis=0;
+	}
