@@ -32,6 +32,8 @@
 #define CLEAR_SCREEN        0x01
 #define CURSOR_OFF          0x0C
 #define TWO_LINES_8BIT_MODE 0x38
+// NEW PART
+#define SET_CURSOR_LOCATION 0x80
 
 
 /********** Config Delay Time ***********/

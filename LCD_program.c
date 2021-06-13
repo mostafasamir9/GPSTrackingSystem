@@ -6,11 +6,11 @@
 *
 * Describtion : Source file for "LCD driver" containing the function definitions for LCD driver
 *
-* Author : Hussein Mahmoud - Mohamed Ahmed - Mohamed Fathy - Mohamed Ali - Mostafa Mohsen - Mostafa Samir
+* Authors     : Mustafa Mohsen - Mohamed Ahmed - Hussein Mahmoud
 *
-* Version     : V02
+* Version     : V03
 *
-* Date        : 6 June 2021
+* Date        : 10 June 2021
 *
 ***************************************************************************/
 #include"stdint.h"
@@ -19,7 +19,8 @@
 #include"LCD_interface.h"
 #include"LCD_config.h"
 
-#include"DIO_config.h"
+
+#include"DIO_interface.h"
 #include"SYSTICK_interface.h"
 
 //---------------------------------------------------------//
@@ -117,6 +118,7 @@ static uint32 power(uint32 Base, uint32 Power){
 }
 
 
+// NEW PART
 //---------------------------------------------------------//
 /*  Describtion: Function to Print Number On LCD
 *				 1. Get number og digits in the number
@@ -147,5 +149,45 @@ void LCD_PrintNumber(uint32 a_num){
 		a_num     = a_num - dummy_var*power(10,digit_count-1); /* remove the greates digit from the number a_num as its printed */
 		digit_count--;
 	}
+	
+	/* Check for floating point */
+	if((uint32_t)(a_num*100) % 100 != 0){
+		LCD_sendChar('.');
+		dummy_var = a_num * 100;
+		digit_count = 2;
+		dummy_var = dummy_var % power(10, digit_count);
+		dummy_var /= power(10, digit_count-1);
+		LCD_sendChar(dummy_var+48);  /* add 48 to the number to be dispalyed on LCD as a character */
+		dummy_var = a_num * 100;
+		dummy_var = dummy_var % power(10, digit_count-1);
+		dummy_var = dummy_var / power(10, digit_count-2);
+		if(dummy_var != 0)	LCD_sendChar(dummy_var+48);  /* add 48 to the number to be dispalyed on LCD as a character */
+	}
+}
+//--------------------------------------------------------------//
+/* description:function to go to specified cursor
+     *   1-gets the num of row&column on the cursor
+      *  2- go to this position
+*************************************************************/
+void LCD_goToRowColumn(uint8 row,uint8 col)
+{
+	uint8 Address;
+	switch(row)
+	{
+		case 0:
+			Address=col;
+		  break;
+		case 1:
+			Address=col+0x40;
+		  break;
+	}
+	LCD_sendCommand(Address | SET_CURSOR_LOCATION); 
+}
+/* description:function to clear all screen
+     *   1- send command to clear all the screen
+*************************************************************/
+void LCD_clearScreen(void)
+{
+	LCD_sendCommand(CLEAR_SCREEN); 
 }
 

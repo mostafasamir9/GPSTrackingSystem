@@ -6,11 +6,11 @@
 *
 * Describtion : Hearder file File for "LCD driver" containing the function prototypes for LCD driver
 *
-* Author : Hussein Mahmoud - Mohamed Ahmed - Mohamed Fathy - Mohamed Ali - Mostafa Mohsen - Mostafa Samir
+* Authors     : Mustafa Mohsen - Mohamed Ahmed - Hussein Mahmoud
 *
-* Version     : V02
+* Version     : V03
 *
-* Date        : 6 June 2021
+* Date        : 10 June 2021
 *
 ***************************************************************************/
 #ifndef LCD_INTERFACE_H_
@@ -51,7 +51,7 @@ void LCD_sendChar(uint8 data);
 *                        
 *  Function Return     : void
 */
-void LCD_Print(uint8_t word[]);
+void LCD_Print(uint8 word[]);
 
 //-------------------------------------------------------------//
 /* Function Parameters : 2 variables from datatype uint32_t
@@ -67,5 +67,18 @@ static uint32 power(uint32 Base, uint32 Power);
 */
 void LCD_PrintNumber(uint32 num);
 
+// NEW PART
+//-------------------------------------------------------------//
+/* Function Parameters : uint8 row,uint8 col
+*                        
+*  Function Return     : void
+*/
+void LCD_goToRowColumn(uint8 row,uint8 col);
+//-------------------------------------------------------------//
+/* Function Parameters : void
+*                        
+*  Function Return     : void
+*/
+void LCD_clearScreen(void);
 #endif
 
