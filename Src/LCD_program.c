@@ -1,45 +1,48 @@
-//---------------------------------------------------------//
-/*  Describtion: Function to Print Number On LCD
-*				 1. Get number og digits in the number
-*        2. Get the number of each digit & print it on LCD
-*************************************************************/
-void LCD_PrintNumber(uint32 a_num){
-	uint32 dummy_var=a_num; /* a dummy variable used in displaying the number on LCD */
-	uint8 digit_count = 0; /* variable to count the number of digit of a_num variable */
+/************************************************************************
+* 
+* Module      : LCD
+*
+* File Nmae   : LCD_program.c
+*
+* Describtion : Source file for "LCD driver" containing the function definitions for LCD driver
+*
+* Authors     : Mustafa Mohsen - Mohamed Ahmed - Hussein Mahmoud
+*
+* Version     : V02
+*
+* Date        : 6 June 2021
+*
+***************************************************************************/
+#include"stdint.h"
+#include"tm4c123gh6pm.h"
 
-	/* check if the sent number is zero Print zero on LCD then edummy_varit function */
-	if(a_num == 0){
-		LCD_sendChar('0');
-		return;
-	}
+#include"LCD_interface.h"
+#include"LCD_config.h"
+
+
+#include"DIO_interface.h"
+#include"SYSTICK_interface.h"
+
+//---------------------------------------------------------//
+/*  Describtion: Function to send a command to LCD
+*								 1. Clear RS Pin.
+*                2. Clear RW Pin then wait for a delay.
+*				 				 3. Set EN Pin then wait for a delay.
+*                4. Send the required command then wait for a delay.
+*                5. Clear EN Pin then wait for a delay.
+*************************************************************/
+void LCD_sendCommand(uint8 comm)
+{
+  CLEAR_BIT(LCD_CTRL_PORT_R,RS); /* Instruction Mode: RS=0 */
+  CLEAR_BIT(LCD_CTRL_PORT_R,RW); /* RW=0 -> Write command to LCD */
+  SYSTICK_BusyWaitms(DELAY_TIME);
 	
-	/* count the number of digits of the passed number "num" and store it in digit_count variable*/
-	while(dummy_var != 0){
-		dummy_var = dummy_var / 10;
-		digit_count++;
-	}
+	SET_BIT(LCD_CTRL_PORT_R,EN); 
+	SYSTICK_BusyWaitms(DELAY_TIME);
 	
+	LCD_DATA_PORT_R=comm; /* send command to LCD */
+  SYSTICK_BusyWaitms(DELAY_TIME);  
 	
-	/* Print the number on LCD screen starting form highest digit */
-	dummy_var = a_num;
-	while(digit_count != 0){
-		dummy_var = a_num/power(10, digit_count-1);
-		LCD_sendChar(dummy_var+48);  /* add 48 to the number to be dispalyed on LCD as a character */
-		a_num     = a_num - dummy_var*power(10,digit_count-1); /* remove the greates digit from the number a_num as its printed */
-		digit_count--;
-	}
-	
-	/* Check for floating point */
-	if((uint32_t)(a_num*100) % 100 != 0){
-		LCD_sendChar('.');
-		dummy_var = a_num * 100;
-		digit_count = 2;
-		dummy_var = dummy_var % power(10, digit_count);
-		dummy_var /= power(10, digit_count-1);
-		LCD_sendChar(dummy_var+48);  /* add 48 to the number to be dispalyed on LCD as a character */
-		dummy_var = a_num * 100;
-		dummy_var = dummy_var % power(10, digit_count-1);
-		dummy_var = dummy_var / power(10, digit_count-2);
-		if(dummy_var != 0)	LCD_sendChar(dummy_var+48);  /* add 48 to the number to be dispalyed on LCD as a character */
-	}
+	CLEAR_BIT(LCD_CTRL_PORT_R, EN);
+	SYSTICK_BusyWaitms(DELAY_TIME); 
 }
